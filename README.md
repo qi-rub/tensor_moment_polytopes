@@ -4,6 +4,6 @@ See our paper [Computing moment polytopes — with a focus on tensors, entanglem
 
 Some visualizations are available as well. See [here](https://html-preview.github.io/?url=https://github.com/qi-rub/tensor_moment_polytopes/blob/main/visualizations/polytopes_sym3_c4.html) for the moment polytopes of some symmetric tensors of shape 4x4x4 under the symmetric GL(4) action (quaternary cubics).
 
-A reference implementation will be made available at a later time. 
+You can also find a plot of the values of the quantum functionals for the capset tensor and the algebra tensor of 2x2 upper triangular matrix multiplication (tensor 10 and 11 in Nurmiev's classification) [here](https://html-preview.github.io/?url=https://github.com/qi-rub/tensor_moment_polytopes/blob/main/visualizations/T10_T11_quantum_functionals.html). Because the graphs intersect, the two tensors are asymptotically incomparable.
 
 These results were presented at STOC 2025. Extended abstract is available [here](https://doi.org/10.1145/3717823.3718221).
