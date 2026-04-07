@@ -18,8 +18,10 @@ e = lambda i,j,k: reduce(lambda x,y: np.tensordot(x, y, axes=0), np.eye(3, dtype
 
 Tdet = e(0,1,2) - e(0,2,1) - e(1,0,2) + e(1,2,0) + e(2,0,1) - e(2,1,0)
 W = e(0,0,1) + e(0,1,0) + e(1,0,0)
-T10 = e(0,0,2) + e(0,1,1) + e(0,2,0) + e(1,0,1) + e(1,1,0) + e(2,0,0)
+T1 = e(0,1,2) + e(0,2,1) + e(1,0,2) + e(1,1,1) + e(1,2,0) + e(2,0,0)
+T2 = e(0,1,2) + e(0,2,1) + e(1,0,2) + e(1,1,0) + e(1,1,1) + e(2,0,0)
 T6 = e(0,0,2) + e(0,1,1) + e(1,0,1) + e(1,2,0) + e(2,1,0)
+T10 = e(0,0,2) + e(0,1,1) + e(0,2,0) + e(1,0,1) + e(1,1,0) + e(2,0,0)
 T17 = e(0,0,1) + e(0,1,0) + e(1,0,2) + e(1,2,0)
 
 Tdet111_to_T10 = [
@@ -73,9 +75,28 @@ Tdet_to_T17 = [
         [ 0,  0, -1],
     ])]
 
+T1_to_T2 = [
+    Matrix([
+        [       x, -1/3/x^2, 1/27/x^8],
+        [       0,        x, -1/3/x^5],
+        [       0,        0,   x^(-2)]
+    ]),
+    Matrix([
+        [      1, 1/3/x^3, 1/9/x^6],
+        [      0,       1, 2/3/x^3],
+        [      0,       0,       1] 
+    ]),
+    Matrix([
+        [     x^2,    1/3/x,  1/9/x^4],
+        [       0,      1/x, -1/3/x^4],
+        [       0,        0,      1/x]
+    ])]
+
 print("Degeneration from Tdet + W to T6:     ",
       vector(apply(TdetW_to_T6, Tdet + W).flatten()).subs({x: 0}) == vector(T6.flatten()))
 print("Degeneration from Tdet + e111 to T10: ",
       vector(apply(Tdet111_to_T10, Tdet + e(0,0,0)).flatten()).subs({x: 0}) == vector(T10.flatten()))
 print("Degeneration from Tdet to T17:        ",
       np.all(apply(Tdet_to_T17, Tdet) == T17))
+print("Degeneration from T1 to T2:           ",
+      vector(apply(T1_to_T2, T1).flatten()).subs({x: 0}) == vector(T2.flatten()))
